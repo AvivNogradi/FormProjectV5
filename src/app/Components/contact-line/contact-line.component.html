@@ -1,0 +1,28 @@
+<div class="lineAndIconsContainer" (click)="openDialog()">
+    <div class="contactLine" >
+        <p>
+            {{contact.firstName}}    {{contact.lastName}}
+          </p>
+          <p>{{contact.email}}</p>
+          <p style="margin-right: 15px">{{contact.phone}}</p>
+    
+    </div>
+    <div class="titelIcons">
+        <i class="material-icons" (click)="editContact(contact)" matTooltip="Edit">
+           create
+        </i>
+         <i class="material-icons" (click)="deleteContact(contact.id)" matTooltip="Delete">
+           clear
+        </i>
+        <i *ngIf=" contact && contact.isFavourite ;else notFavourite" class="material-icons" (click)="turnOff(contact.id)" matTooltip="Favourites">
+            star
+            </i>
+            <ng-template #notFavourite>
+                <i class="material-icons" (click)="turnOn(contact)">
+                    star_border
+                    </i>
+            </ng-template>
+        </div>
+</div>
+
+

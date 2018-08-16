@@ -1,0 +1,62 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+.root {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+}
+
+.mat-form-field-wrapper{
+    margin-right: 50px;
+}
+
+.mat-dialog-container{
+    padding:0;
+}
+.mat-form-field-infix {
+    position: inherit !important;
+    padding: inherit !important;
+    
+}
+.email .mat-form-field .mat-form-field-wrapper{
+    width:130% !important;
+}
+.phone .mat-form-field .mat-form-field-wrapper{
+    width:130% !important;
+}
+.mat-form-field-wrapper {
+  
+    font-size: 25px !important;
+    
+}
+.mat-form-field-flex .mat-form-field-infix {
+    font-size:17px;
+}
+.searchBar .mat-form-field-wrapper .mat-form-field-underline {
+    display: none;
+}
+
+.snackBar {
+    color:green;
+    background-color: white;
+    border: 1px solid green;
+}
+.abcRioButton {
+    width:50px !important;
+    height: 50px !important;
+    border-radius: 50% !important;
+}
+.abcRioButtonIcon {
+    padding: 15px !important;
+}
+.searchBar .mat-form-field-wrapper{
+    width:100%;
+}

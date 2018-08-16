@@ -1,0 +1,98 @@
+<div *ngIf="!askToDelete">
+    <div class="cardDialogContainer">
+        <div class="title">
+            <div class="titelIcons">
+                <i class="material-icons" (click)="editContact(contact)" matTooltip="Edit">
+                   create
+                </i>
+                 <i class="material-icons" (click)="deleteContact()" matTooltip="Delete">
+                   clear
+                </i>
+                <i *ngIf="contact.isFavourite ;else notFavourite" class="material-icons" (click)="turnOff(contact.id)" matTooltip="Favourites">
+                    star
+                    </i>
+                    <ng-template #notFavourite>
+                        <i class="material-icons" (click)="turnOn(contact)">
+                            star_border
+                            </i>
+                    </ng-template>
+            </div>
+            <div class="cardTitle">
+                <h2 style="margin-left:15px;font-family: Roboto">{{contact.firstName}} {{contact.lastName}}</h2>
+            </div>
+           
+           
+        </div>
+        
+          
+          <div class="container">
+              <h3 style="font-family: Roboto">Contact Details</h3>
+              
+            <mat-dialog-content>
+              <div>
+                  <p class="email">    
+            <i class="material-icons">
+                email
+                </i>
+                {{contact.email}}
+              </p>
+              </div>
+      
+                <div>
+                    <p class="phone"> 
+                        <i class="material-icons">
+                            call
+                            </i>
+                      {{contact.phone}}
+                    </p>
+                </div>
+              
+                <div>
+                    <p class="jobInfo"> 
+                        <i class="material-icons">
+                            domain
+                            </i>
+                      {{contact.company}} , {{contact.jobTitle}}
+                    </p>
+                </div>
+                <div>
+                    <p class="gender"> 
+                        <i class="material-icons">
+                            wc
+                            </i>    
+                      {{contact.gender}}
+                    </p>
+                </div>
+                <div>
+                    <p class="birthdate"> 
+                        <i class="material-icons">
+                            cake
+                            </i>
+                      {{birthDate}}
+                    </p>
+                </div>
+                <div>
+                  
+                </div>
+            </mat-dialog-content>
+            <div class="submit">
+            <button mat-raised-button class="closeBtn" color="primary" (click)="onNoClick()">Close</button>
+            </div>
+      
+      </div>
+</div>
+</div>
+<div *ngIf="askToDelete">
+    <h2 >
+        Are you sure you want do delete this contact?
+    </h2>
+    <div class="deleteButtons" >
+        <button mat-raised-button color="primary" (click)="sureDeleteContact(contact.id)">Yes</button>
+        <button mat-raised-button color="primary" (click)="onNoClick()" style="margin-left:10px">No</button>
+    </div>
+  
+</div>
+
+  
+
+    

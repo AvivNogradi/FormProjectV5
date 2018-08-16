@@ -1,0 +1,98 @@
+.header {
+    position:fixed;
+    z-index: 1000;
+    top: 0; 
+    height:80px;
+    font-size: 30px;
+    justify-content: center;
+    align-items: center;
+    background-color: #2a56c6;
+}
+.liner {
+    display: flex;
+    justify-content: flex-start;
+}
+.addButton {
+    margin-top:180px;
+    margin-right: 66px;
+}
+.addButton:hover {
+   cursor: pointer;
+}
+.buttonWrapper {
+    display: flex;
+    justify-content: flex-end;
+    height: 180px;
+}
+.plusIcon {
+    
+    font-size: 35px;
+}
+.plusIcon:hover {
+    
+    cursor: pointer;
+}
+input[type=text]:focus:not([readonly]) {
+    box-shadow: none;
+    border-bottom: none;
+  }
+  .searchBar {
+    display: flex;
+    align-items: center;
+    margin-left: 60px;
+    background-color: rgba(255,255,255,0.16);
+    color: black;
+    outline:0;
+    font-size:15px;
+    padding-left: 15px;
+    padding-top: 17px;
+    height: 40px;
+    width: 35%;
+    border-radius: 4px;
+  }
+  .searchBar:hover {
+      cursor: text;
+  }
+  mat-form-field.mat-focused {
+    background-color: white;
+   
+}
+  .mat-input-underline {
+    display: none;
+}
+
+mat-form-field-empty.mat-form-field-label{
+    display:none
+} 
+
+.mat-form-field-label{
+    margin-top: 25px !important;
+    margin-left: 50px !important;
+  
+}
+
+.placeHolder {
+    transform: translate(20px, -20px);
+}
+.MGlass {
+    transform: translate(0px, 10px);
+    color:white;
+}
+.material-icons:hover {
+cursor: pointer;
+}
+.googleButton {
+    transform: translate(1160px,0);
+    border-radius:50%;
+}
+.abcRioButton {
+    width:50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.iconBlack{
+    color:black;
+    background-color: red;
+   
+}

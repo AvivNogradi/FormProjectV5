@@ -1,0 +1,69 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+  }
+.name {
+    display: flex;
+    align-items: center;
+    width: 80%;
+}
+.nameField {
+    width: 50%;
+}
+.header {
+    font-size: 35px;
+    justify-content: center;
+    align-items: center;
+}
+.companyAndJob {
+    display: flex;
+   
+    align-items: center;
+    width: 80%;
+}
+.jobField {
+    width: 50%;
+ 
+}
+.email {
+    display: flex;
+    align-items: center;
+    width: 80%;
+}
+.example-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
+  
+  .example-margin {
+    margin: 0 10px;
+  }
+  .phone {
+      display: flex;
+      align-items: center;
+  }
+  .material-icons {
+      margin-right: 10px;
+  }
+  .jobInput {
+      margin-right: 50px;
+  }
+  .submit {
+      display: flex;
+      justify-content: flex-end;   
+      margin-top: 25px;
+  }
+  .closeBtn {
+      margin-left: 10px;
+  }
+  .birthdate {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+  }
+  .snackBar {
+      color:green;
+      background-color: aqua;
+  }

@@ -1,0 +1,106 @@
+
+    <div class="example-container">
+        <div class="container">
+            <form (ngSubmit)="onSubmit(myform)" #myform="ngForm">
+            <mat-toolbar class="header" color="secondary">
+                <mat-toolbar-row class="liner">
+                  <span>{{title}}{{contactFirstName + ' ' + contactLastName}}</span>
+ 
+                </mat-toolbar-row>
+            </mat-toolbar><br/>
+
+            <div class="form-group">
+                <div class="name">
+                <i class="material-icons" style="margin-bottom:20px">
+                    account_circle
+                </i>
+                 <mat-form-field class="nameField" style="margin-bottom:20px">
+                     <input matInput placeholder="First Name" class="form-control" id="firstName" [(ngModel)]="contactFirstName" name="firstName" required>
+                     <mat-error >You must enter a value</mat-error>
+                   </mat-form-field>
+                   <mat-form-field class="nameField" style="margin-bottom:20px">
+                     <input matInput placeholder="Last Name" class="form-control" id="lastName" [(ngModel)]="contactLastName" name="lastName" required>
+                     <mat-error >You must enter a value</mat-error>
+                   </mat-form-field>
+                </div>
+
+           </div>
+           <div class="form-group">
+              <div class="companyAndJob">
+                  <i class="material-icons" style="margin-bottom:25px">
+                      domain
+                      </i>
+                  <mat-form-field class="jobField" style="margin-bottom:20px">
+                      <input matInput placeholder="Job Title" class="form-control" id="jobTitle" [ngModel]="myContact.jobTitle" name="jobTitle">
+                    </mat-form-field>
+                    <mat-form-field class="jobField" style="margin-bottom:20px">
+                        <mat-select placeholder="Company" class="form-control" id="company" [ngModel]="myContact.company" name="company">
+                          <mat-option value="Google">Google</mat-option>
+                          <mat-option value="Apple">Apple</mat-option>
+                          <mat-option value="Amazon">Amazon</mat-option>
+                          <mat-option value="Dooble">Dooble</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+              </div>
+           </div>
+     <div class="form-group">
+     <div class="email">
+        <i class="material-icons" style="margin-bottom:25px">
+            email
+            </i>
+        <mat-form-field style="width:100%" style="margin-bottom:20px">
+            <input matInput type="email" placeholder="Email" class="form-control" id="email" [ngModel]="myContact.email" name="email" 
+            required email pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+            <mat-error >You must enter a valid mail</mat-error>
+          </mat-form-field>
+     </div>
+    </div>
+
+    <div class="form-group">
+        <div class="phone">
+            <i class="material-icons" style="margin-bottom:25px">
+                call
+                </i>
+            <mat-form-field style="width:77%" style="margin-bottom:20px">
+                <input matInput placeholder="Phone Number" class="form-control" id="phone" [ngModel]="myContact.phone" name="phone" required pattern='^\+?\d{0,13}'>
+                <mat-error >You must enter a valid phone</mat-error>
+              </mat-form-field>
+         </div>
+           <div>
+    </div>   
+    <div class="form-group">
+        <section class="example-section">
+            <i class="material-icons" >
+                wc
+                </i>                  
+            <mat-radio-group class="form-control" id="gender" [ngModel]="myContact.gender" name="gender">
+              <mat-radio-button class="example-margin" value="Male">Male</mat-radio-button>
+              <mat-radio-button class="example-margin" value="Female">Female</mat-radio-button>
+            </mat-radio-group>
+          </section>
+     </div>
+    </div>
+
+      <div class="form-group">
+          <div class="birthdate">
+                <i class="material-icons" style="margin-bottom:10px">
+                        cake
+                        </i>
+              <mat-form-field>
+                  <input matInput  [matDatepicker]="picker" [max]="maxDate" placeholder="Birthdate" class="form-control" id="birthDate" 
+                  [ngModel]="birthDate" name="birthDate">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+      </div> 
+      <div class="submit">
+          <button mat-raised-button  color="primary" type="submit" [disabled]="myform.invalid">Submit</button>
+          <button mat-raised-button class="closeBtn" type="button" color="primary" (click)="onNoClick()">Cancel</button>
+      </div>
+     
+</form>
+      
+    </div>
+    </div>
+

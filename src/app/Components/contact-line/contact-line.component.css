@@ -1,0 +1,33 @@
+.contactLine {
+    display: flex;
+    flex-direction: row;
+  
+    width:100%;
+    font-size: 30px;
+    margin-left: 15px;
+    padding: 15px;
+}
+.lineAndIconsContainer:hover {
+    background-color: #f0f5f5;
+    cursor: pointer;
+    border-radius: 10px;
+    
+}
+.titelIcons {
+    display: flex;
+    width: 40%;
+    justify-content: flex-end;
+    margin-right: 20px;
+}
+.lineAndIconsContainer {
+    display: flex;
+    align-items: center;
+    width:60%
+}
+
+.material-icons {
+    margin-left: 40px;
+}
+p {
+    margin-right: 100px;
+}

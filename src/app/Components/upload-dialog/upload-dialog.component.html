@@ -1,0 +1,7 @@
+<div>
+   <input type="file" (change)="incomingfile($event)" placeholder="Upload file" accept=".xlsx">
+    <div class="deleteButtons" >
+        <button mat-raised-button color="primary" (click)="sureDeleteContact()">Confrim</button>
+        <button mat-raised-button color="primary" (click)="onNoClick()" style="margin-left:10px">Cancel</button>
+    </div>
+</div>
