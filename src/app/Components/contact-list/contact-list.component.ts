@@ -6,8 +6,9 @@ import { ContactCardComponent } from '../contact-card/contact-card.component';
 import { MatDialog } from '@angular/material';
 import { ContactDetailsComponent } from '../contact-details/contact-details.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
-import {MatSort, MatTableDataSource} from '@angular/material';
+import {MatSort, MatTableDataSource, MatPaginator} from '@angular/material';
 import * as XLSX from 'xlsx';
+import { ImportDialogComponent } from '../import-dialog/import-dialog.component';
 
 @Component({
   selector: 'contact-list',
@@ -41,14 +42,16 @@ export class ContactListComponent implements OnInit{
   }
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('table') table: ElementRef;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
 
   ngOnInit() {
     this.contactAdded()
     this.favouriteAdded()
 
-    this.dataSource = new MatTableDataSource(this.contacts);
+    this.dataSource = new MatTableDataSource<Contact>(this.contacts);
     this.dataSource.sort = this.sort;
- 
+    this.dataSource.paginator = this.paginator;
   }
 
   contactAdded(){
@@ -106,7 +109,7 @@ export class ContactListComponent implements OnInit{
  
     
     if(result.data == 'yes'){
-     
+     console.log("yes!")
       this.contacts = JSON.parse(localStorage.getItem("contacts"));
       this.favourites = JSON.parse(localStorage.getItem("favourites"));
 
@@ -115,7 +118,7 @@ export class ContactListComponent implements OnInit{
         this.contacts.splice(contactsIndex, 1);
 
         localStorage.setItem("contacts", JSON.stringify(this.contacts));
-        this.contactAdded()
+        
         
       }
       var favouritesIndex = this.favourites.findIndex((c)=>{return c.id == contact.id});
@@ -186,22 +189,86 @@ export class ContactListComponent implements OnInit{
   }
   }
 
+  getExcelFileData(fileReader){
+            
+    this.arrayBuffer = fileReader.result;
+    var data = new Uint8Array(this.arrayBuffer);
+    var arr = new Array();
+    for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+    var bstr = arr.join("");
+    var workbook = XLSX.read(bstr, {type:"binary"});
+    var first_sheet_name = workbook.SheetNames[0];
+    var worksheet = workbook.Sheets[first_sheet_name];
+    let excelContactsObject = XLSX.utils.sheet_to_json(worksheet,{raw:true})
+    
+    return excelContactsObject;
+  }
+
   Upload() {
+    var filteredArray = [];
     let fileReader = new FileReader();
+    let count = 0;
       fileReader.onload = (e) => {
-          this.arrayBuffer = fileReader.result;
-          var data = new Uint8Array(this.arrayBuffer);
-          var arr = new Array();
-          for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
-          var bstr = arr.join("");
-          var workbook = XLSX.read(bstr, {type:"binary"});
-          var first_sheet_name = workbook.SheetNames[0];
-          var worksheet = workbook.Sheets[first_sheet_name];
-          let excelContactsObject = XLSX.utils.sheet_to_json(worksheet,{raw:true})
-          
+
+        let excelContactsObject = this.getExcelFileData(fileReader)
+
           this.excelContacts = excelContactsObject
-         this.contacts = this.excelContacts
-         localStorage.setItem("contacts", JSON.stringify(this.contacts));
+          if(!this.contacts || this.contacts.length == 0){
+            this.contacts = this.excelContacts;
+            localStorage.setItem("contacts", JSON.stringify(this.contacts));
+            return;
+          }
+         
+          for(let i = 0; i < this.contacts.length; i++){
+            for(let j = 0; j < this.excelContacts.length; j++){
+              let similar = this.contacts[i].firstName == this.excelContacts[j].firstName && this.contacts[i].lastName == this.excelContacts[j].lastName
+                  if(similar){
+                  count++
+                    const dialogRef = this.dialog.open(ImportDialogComponent, {
+                      width: '550px',
+                      height: '450px',
+                      data: {contact:this.excelContacts[j]},
+                    });
+                  
+                    dialogRef.afterClosed().subscribe(result => {
+                      count--
+                        if(result.data.msg == 'keep'){
+                         filteredArray.push(this.contacts[i])
+                        }
+                     
+                       if(result.data.msg == 'replace'){
+                          filteredArray.push(this.excelContacts[j])
+                        }
+                        if(result.data.msg == 'change'){
+                          var contactsIndex = this.excelContacts.findIndex((c)=>{return c.id == result.data.contact.id});
+                          if(contactsIndex != -1){
+                            this.excelContacts[contactsIndex] = result.data.contact;
+                          }
+                        }
+                        if(count == 0){
+                          this.contacts = this.contacts.filter( contact =>{
+                            let similar = filteredArray.some(f=> f.firstName == contact.firstName && f.lastName == contact.lastName)
+                            return !similar;
+                          });
+                  
+                          this.excelContacts = this.excelContacts.filter( contact => {
+                            let similar = filteredArray.some(f=> f.firstName == contact.firstName && f.lastName == contact.lastName)
+                            return !similar;
+                          })
+                            
+                         this.contacts = this.contacts.concat(this.excelContacts,filteredArray)
+                         localStorage.setItem("contacts", JSON.stringify(this.contacts));
+                        }
+                    });
+                       }
+                   
+                    
+                    
+                  }   
+                     
+            }
+         
+       
       }
       fileReader.readAsArrayBuffer(this.file);
     //  console.log( typeof fileReader)

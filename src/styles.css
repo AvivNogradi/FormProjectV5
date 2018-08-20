@@ -60,3 +60,6 @@ html, body {
 .searchBar .mat-form-field-wrapper{
     width:100%;
 }
+.searchBar .mat-form-field-label-wrapper .mat-form-field-label{
+    transform: translate(67px,20px) !important;
+}

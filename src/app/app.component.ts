@@ -81,7 +81,6 @@ export class AppComponent implements OnInit {
     this.searchIconWhite = false;
   }
   onBlur(){
-    console.log("blur")
     this.iconBlack = false;
   }
 
@@ -116,8 +115,8 @@ export class AppComponent implements OnInit {
    
  
   
-  startFiltering(event){
-    
+  startFiltering(){
+   
     this.searchIconWhite = true;
     if(!this.filteredContact || this.filteredContact.length == 0){
       this.contactService.sendMessage(JSON.parse(localStorage.getItem("contacts")));
@@ -126,8 +125,10 @@ export class AppComponent implements OnInit {
       this.contactService.sendMessage(this.filteredContacts);
      }
   }
+
+    
  
- 
+  
   // gotFocus(){
    
   //     this.filteredContact = '';

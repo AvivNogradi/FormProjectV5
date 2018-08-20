@@ -1,0 +1,14 @@
+<div>
+    <h2> {{contact.firstName}} already exists in your table</h2>
+    <p> what would you like to do about it?</p>
+    <p (click)="keepCurrent()">1: keep current contact</p>
+    <p (click)="replaceWithNew()">2: Replace with your new contact</p>
+    <p (click)="changeNew()">3: Change the new contacts details and have both</p><br/><br>
+    <div *ngIf="input">
+        <label>First name: </label><input [(ngModel)]="newContactFirstName"/><br/>
+        <label>Last name: </label><input style="margin-left: 2px"[(ngModel)]="newContactLastName"/>
+        <button (click)="submit()">Submit</button>
+    </div>
+ 
+</div>
+

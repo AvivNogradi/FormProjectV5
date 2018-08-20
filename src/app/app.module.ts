@@ -7,7 +7,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatOptionModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatSnackBarModule, DateAdapter} from '@angular/material';
-import {MatInputModule, MatCheckboxModule, MatRadioModule, MatTableModule,MatAutocompleteModule} from '@angular/material';
+import {MatInputModule, MatCheckboxModule, MatRadioModule, MatTableModule,MatAutocompleteModule,MatPaginatorModule} from '@angular/material';
 import {MatTooltipModule} from '@angular/material/tooltip';
 
 import { AppComponent } from './app.component';
@@ -20,6 +20,7 @@ import { DeleteDialogComponent } from './Components/delete-dialog/delete-dialog.
 import { DatePickerModule, CustomDateAdapter } from './Classes/DateAdapter';
 import { UploadDialogComponent } from './Components/upload-dialog/upload-dialog.component';
 import { SnackBarComponent } from './Components/snack-bar/snack-bar.component';
+import { ImportDialogComponent } from './Components/import-dialog/import-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,18 +31,21 @@ import { SnackBarComponent } from './Components/snack-bar/snack-bar.component';
     ContactLineComponent,
     DeleteDialogComponent,
     UploadDialogComponent,
-    SnackBarComponent
+    SnackBarComponent,
+    ImportDialogComponent
   ],
   entryComponents: [
     ContactDetailsComponent,
     ContactCardComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    ImportDialogComponent
   ],
   imports: [
     BrowserModule,
     MatToolbarModule,
     FormsModule,
     DatePickerModule,
+    MatPaginatorModule,
     MatAutocompleteModule,
     MatSnackBarModule,
     ReactiveFormsModule,

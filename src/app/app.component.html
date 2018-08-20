@@ -6,13 +6,10 @@
             <i  class="material-icons MGlass" style="font-size:40px;color:white" [ngStyle]="{'color':iconBlack == true ? 'black' : 'white' }" (click)="startFiltering()">
                 search
                 </i>
-                <input id="input" style="width:100%;margin-left:28px;font-size:25px"  matInput name="searchContact" on-focus="changeMgColor()" on-blur="onBlur()"
+                <input id="input" placeholder="Search" style="width:100%;margin-left:28px;font-size:25px;transform:translate(0,-10px);"  matInput name="searchContact" on-focus="changeMgColor()" on-blur="onBlur()"
                 [(ngModel)]="filteredContact" (keyup)="filterContactByName()" on-keydown="startFilter($event)"> 
                 <div class="placeHolder">
-                    <mat-placeholder floatLabel="never" *ngIf="!filteredContact;else noPH" style="margin-top:25px;margin-left:50px;color:#BEC0C6">Search</mat-placeholder>
-                    <ng-template #noPH>
-                      <mat-placeholder style="color:transparent">.</mat-placeholder>
-                    </ng-template>
+                    
                 </div>
                
           </mat-form-field>
