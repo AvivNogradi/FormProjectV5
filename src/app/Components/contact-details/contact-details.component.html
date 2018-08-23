@@ -4,7 +4,7 @@
             <form (ngSubmit)="onSubmit(myform)" #myform="ngForm">
             <mat-toolbar class="header" color="secondary">
                 <mat-toolbar-row class="liner">
-                  <span>{{title}}{{contactFirstName + ' ' + contactLastName}}</span>
+                  <span>{{title}} {{contactFirstName + ' ' + contactLastName}}</span>
  
                 </mat-toolbar-row>
             </mat-toolbar><br/>
@@ -48,7 +48,7 @@
         <i class="material-icons" style="margin-bottom:25px">
             email
             </i>
-        <mat-form-field style="width:100%" style="margin-bottom:20px">
+        <mat-form-field style="width:100%" style="margin-bottom:20px" class="email">
             <input matInput type="email" placeholder="Email" class="form-control" id="email" [ngModel]="myContact.email" name="email" 
             required email pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
             <mat-error >You must enter a valid mail</mat-error>
@@ -61,7 +61,7 @@
             <i class="material-icons" style="margin-bottom:25px">
                 call
                 </i>
-            <mat-form-field style="width:77%" style="margin-bottom:20px">
+            <mat-form-field style="width:77%" style="margin-bottom:20px" class="phone">
                 <input matInput placeholder="Phone Number" class="form-control" id="phone" [ngModel]="myContact.phone" name="phone" required pattern='^\+?\d{0,13}'>
                 <mat-error >You must enter a valid phone</mat-error>
               </mat-form-field>
@@ -86,7 +86,7 @@
                 <i class="material-icons" style="margin-bottom:10px">
                         cake
                         </i>
-              <mat-form-field>
+              <mat-form-field class="birthdate">
                   <input matInput  [matDatepicker]="picker" [max]="maxDate" placeholder="Birthdate" class="form-control" id="birthDate" 
                   [ngModel]="birthDate" name="birthDate">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>

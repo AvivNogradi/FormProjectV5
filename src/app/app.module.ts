@@ -6,8 +6,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatOptionModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatSnackBarModule, DateAdapter} from '@angular/material';
-import {MatInputModule, MatCheckboxModule, MatRadioModule, MatTableModule,MatAutocompleteModule,MatPaginatorModule} from '@angular/material';
+import {MatOptionModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatSnackBarModule, DateAdapter,} from '@angular/material';
+import {MatInputModule, MatCheckboxModule, MatRadioModule, MatTableModule,MatAutocompleteModule,MatPaginatorModule,MatSortModule,MatGridListModule} from '@angular/material';
 import {MatTooltipModule} from '@angular/material/tooltip';
 
 import { AppComponent } from './app.component';
@@ -21,6 +21,8 @@ import { DatePickerModule, CustomDateAdapter } from './Classes/DateAdapter';
 import { UploadDialogComponent } from './Components/upload-dialog/upload-dialog.component';
 import { SnackBarComponent } from './Components/snack-bar/snack-bar.component';
 import { ImportDialogComponent } from './Components/import-dialog/import-dialog.component';
+import { GridComponent } from './Components/grid/grid.component';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { ImportDialogComponent } from './Components/import-dialog/import-dialog.
     DeleteDialogComponent,
     UploadDialogComponent,
     SnackBarComponent,
-    ImportDialogComponent
+    ImportDialogComponent,
+    GridComponent,
+
   ],
   entryComponents: [
     ContactDetailsComponent,
@@ -45,6 +49,8 @@ import { ImportDialogComponent } from './Components/import-dialog/import-dialog.
     MatToolbarModule,
     FormsModule,
     DatePickerModule,
+    MatGridListModule,
+    MatSortModule,
     MatPaginatorModule,
     MatAutocompleteModule,
     MatSnackBarModule,

@@ -1,7 +1,34 @@
-p {
-    cursor: pointer;
-}
+
 input {
     margin-right: 10px;
     margin-bottom: 10px;
+}
+.buttons{
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 10px;
+    margin-top: 70px;
+}
+.details{
+    display: flex;
+    justify-content: space-around;
+}
+.header{
+    margin-bottom: 50px;
+}
+.contactsDetails{
+    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+.excelContactsDetails{
+    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+.mat-form-field-infix{
+    display: flex !important;
+    flex-direction: row !important;
+}
+.chooseButtons:hover{
+ background-color: grey;
+ box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3); 
 }

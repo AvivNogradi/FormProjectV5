@@ -5,8 +5,8 @@
                 <i class="material-icons" (click)="editContact(contact)" matTooltip="Edit">
                    create
                 </i>
-                 <i class="material-icons" (click)="deleteContact()" matTooltip="Delete">
-                   clear
+                <i class="material-icons" (click)="deleteContact()" matTooltip="Delete">
+                   delete
                 </i>
                 <i *ngIf="contact.isFavourite ;else notFavourite" class="material-icons" (click)="turnOff(contact.id)" matTooltip="Favourites">
                     star

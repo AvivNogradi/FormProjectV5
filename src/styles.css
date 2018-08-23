@@ -14,18 +14,12 @@ html, body {
     flex-direction: column;
 }
 
-.mat-form-field-wrapper{
-    margin-right: 50px;
-}
+
 
 .mat-dialog-container{
     padding:0;
 }
-.mat-form-field-infix {
-    position: inherit !important;
-    padding: inherit !important;
-    
-}
+
 .email .mat-form-field .mat-form-field-wrapper{
     width:130% !important;
 }
@@ -61,5 +55,73 @@ html, body {
     width:100%;
 }
 .searchBar .mat-form-field-label-wrapper .mat-form-field-label{
-    transform: translate(67px,20px) !important;
+    transform: translate(67px,15px) !important;
+}
+
+mat-form-field.mat-paginator-page-size-select{
+    width:100px;
+}
+
+.contactsDetails mat-form-field .mat-form-field-wrapper .mat-form-field-flex .mat-form-field-infix{
+    display: flex !important;
+    flex-direction: row !important;
+}
+.excelContactsDetails mat-form-field .mat-form-field-wrapper .mat-form-field-flex .mat-form-field-infix{
+    display: flex !important;
+    flex-direction: row !important;
+}
+.mat-checkbox-inner-container{
+    margin-right: 10px !important;
+}
+
+
+grid mat-grid-list {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+grid mat-grid-list .grid-wrapper .ng-star-inserted .ng-star-inserted:not(mat-select.ng-star-inserted){
+    width:52%;
+    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+}
+grid mat-grid-list .grid-wrapper .ng-star-inserted .material-icons{
+    margin-bottom:0;
+    box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0);
+    margin-left: 0px;
+    padding: 0px;
+}
+grid mat-grid-list .grid-wrapper .ng-star-inserted .ng-star-inserted .change2X1{
+    margin-bottom:0;
+    box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0);
+    margin-left: 0px;
+    padding: 0px;
+}
+grid mat-grid-list .grid-wrapper mat-select.ng-star-inserted {
+    margin-bottom:0 !important;
+    box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0) !important;
+    margin-left: 0px !important;
+    padding: 0px !important;
+    width:0 !important;
+    margin:0 !important;
+    float:none !important;
+    display:unset !important;
+}
+.container mat-form-field .mat-form-field-wrapper .mat-form-field-flex .mat-form-field-infix{
+    width:120px;
+}
+mat-form-field.nameField{
+    margin-right:30px;
+}
+mat-form-field.jobField{
+    margin-right:30px;
+}
+mat-form-field .mat-form-field-wrapper {
+    width:100%;
+}
+grid{
+    display:flex;
+    flex-direction: row-reverse;
+    margin-top:20px;
 }

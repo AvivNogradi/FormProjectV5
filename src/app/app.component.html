@@ -25,7 +25,8 @@
     <button mat-fab color="warn" class="addButton" mat-raised-button (click)="openDialog()" matTooltip="Add"><label class="plusIcon">+</label></button>
   </div>
   <contact-list [contact]="contact"></contact-list>
-  <h2 *ngIf="!noContacts" style="transform:translate(1000px,-200px)"> No contact has been found</h2>
+  <h2 *ngIf="!noContacts" style="transform:translate(930px,-150px)">No contact has been found</h2>
+  <h1 *ngIf="!contacts && noContacts || contacts.length == 0 && noContacts" style="transform:translate(930px,-150px)">Contact list is empty</h1>
   </div>
   
  

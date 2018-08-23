@@ -30,7 +30,7 @@ export class ContactCardComponent implements OnInit {
     let tempArray = tempstring.split("-");
     let newBirthday = tempArray[2] + '/' + tempArray[1] +'/' + tempArray[0];
     let newBirthDayFormat = new Date(Number(tempArray[0]),Number(tempArray[1])-1,Number(tempArray[2])+1)
-    this.birthDate = this.adapter.format(newBirthDayFormat);
+    //this.birthDate = this.adapter.format(newBirthDayFormat);
   }
  else{
    this.birthDate = this.contact.birthDate

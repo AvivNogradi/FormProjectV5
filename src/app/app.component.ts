@@ -5,7 +5,7 @@ import { Contact } from './Classes/Contact';
 import { AddContactServerService } from './Services/add-contact-server.service';
 import { ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 
 @Component({
@@ -19,16 +19,22 @@ export class AppComponent implements OnInit {
   filteredContact: string;
   filteredContacts: Contact[];
    input:string
+   subscription:Subscription;
    myControl = new FormControl();
    options= ['aviv', 'yoav', 'ilan'];
    searchIconWhite = true;
+   contacts:Contact[]
   //@ViewChild('input') input: MatInputDirective;
 
-  constructor(public dialog: MatDialog, private contactService:AddContactServerService){}
+  constructor(public dialog: MatDialog, private contactService:AddContactServerService){
+    this.subscription = this.contactService.contactCurrentMessage.subscribe( contacts => {
+      this.contacts = contacts });
+  }
 
 
   ngOnInit(){
     this.contactService.sendMessage(JSON.parse(localStorage.getItem("contacts")));
+    this.contacts = JSON.parse(localStorage.getItem("contacts"));
   }
 
 
@@ -47,10 +53,10 @@ export class AppComponent implements OnInit {
  }
 
  filterContactByName(input){
-  var filteredContacts:Contact[] = JSON.parse(localStorage.getItem("contacts"));
+  var filteredContacts:Contact[] = JSON.parse(localStorage.getItem("contacts")) || [];
   var groupContacts: Contact[] = [];
   
-   if(this.filteredContact.length > 2){
+   if(this.filteredContact && this.filteredContact.length > 2){
        for(let i = 0; i < filteredContacts.length; i++){
      
 
@@ -106,7 +112,6 @@ export class AppComponent implements OnInit {
               this.noContacts = true;
             }
           }
-      
     }
   
      

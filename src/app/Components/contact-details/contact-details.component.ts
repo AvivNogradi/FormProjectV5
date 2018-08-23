@@ -97,9 +97,9 @@ export class ContactDetailsComponent implements OnInit {
   
    this.contacts.push(this.contact);
    localStorage.setItem("contacts", JSON.stringify(this.contacts))
-   this.contactService.sendMessage(JSON.parse(localStorage.getItem("contacts")));
+   this.contactService.sendMessage(this.contacts);
    this.dialogRef.close();
-   this.contactService.addContact(this.contact);
+  // this.contactService.addContact(this.contact);
    if(!oldContact)
    this.snackBar.open(this.contact.firstName + ' ' + this.contact.lastName + '' + ' Has been added to your list','',{duration: 3000, panelClass:['snackBar']});
    // let snackBarRef =  this.snackBar.openFromComponent(SnackBarComponent )

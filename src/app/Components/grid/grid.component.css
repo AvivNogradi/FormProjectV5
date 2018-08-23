@@ -1,0 +1,58 @@
+.showTableButton {
+    display: flex;
+    justify-content: flex-end;
+    transform: translate(-63px,30px);
+    position: relative;
+    z-index: 4;
+}
+.cardsContainer{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+}
+.cardDialogContainer{
+    width:400px;
+    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    transform: translate(300px);
+    margin: 30px;
+    float: left;
+    width: calc(23% - 60px);
+    margin-bottom: 100px;
+    margin-left: 38px;
+}
+.title {
+    background-color: #f0f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    flex-direction: row-reverse;
+}
+.titelIcons {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+    justify-content: flex-end;
+}
+.material-icons {
+    margin-right: 15px;
+    transform: translate(0,5px);
+}
+.material-icons:hover {
+cursor: pointer
+}
+.closeBtn{
+    transform: translate(400px);
+}
+.cardDialogContainer2X1{
+    width: 1082px !important;
+}
+.cardDialogContainer1X2{
+    height: 1053px !important;
+}
+.container {
+    width:100%;
+    height:100%;
+}
+

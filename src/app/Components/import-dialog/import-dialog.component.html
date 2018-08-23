@@ -1,14 +1,64 @@
 <div>
-    <h2> {{contact.firstName}} already exists in your table</h2>
-    <p> what would you like to do about it?</p>
-    <p (click)="keepCurrent()">1: keep current contact</p>
-    <p (click)="replaceWithNew()">2: Replace with your new contact</p>
-    <p (click)="changeNew()">3: Change the new contacts details and have both</p><br/><br>
-    <div *ngIf="input">
-        <label>First name: </label><input [(ngModel)]="newContactFirstName"/><br/>
-        <label>Last name: </label><input style="margin-left: 2px"[(ngModel)]="newContactLastName"/>
-        <button (click)="submit()">Submit</button>
-    </div>
+  <div class="header">
+      <h2 style="font-size:30px;font-family:Roboto"> {{headerFirstName}} {{headerLastName}} already exists in your table</h2>
+      <h4 style="font-size:25px;font-family:Roboto">Choose what to do:</h4>
+      <button mat-raised-button (click)="replaceWithNew()"><span style="font-size:15px;font-family:Roboto">1: Replace with your new contact</span></button><br/><br>
+      <button mat-raised-button (click)="changeNew()"><span style="font-size:15px;font-family:Roboto">2: Change and pick which information to save</span></button><br/><br>
+      
+  </div>
+ 
+  
+      
+        <div class="details" *ngIf="input">
+          <div class="contactsDetails">
+            <h2>Current Contact</h2>
+              <mat-form-field>
+                  <mat-checkbox class="example-margin" [(ngModel)]="dialogContactFirstNameChecked"></mat-checkbox>
+                  <input matInput placeholder="First Name" class="form-control" id="firstName" [(ngModel)]="dialogContact.firstName" name="firstName">
+              </mat-form-field><br/>
+                <mat-form-field>
+                    <mat-checkbox class="example-margin" [(ngModel)]="dialogContactLastNameChecked"></mat-checkbox>
+                    <input matInput placeholder="Last Name" class="form-control" id="lastName" [(ngModel)]="dialogContact.lastName" name="lastName">
+                </mat-form-field><br/>
+                <mat-form-field>
+                    <mat-checkbox class="example-margin" [(ngModel)]="dialogContactEmailChecked"></mat-checkbox>
+                    <input matInput type="email" placeholder="Email" class="form-control" id="email" [ngModel]="dialogContact.email" name="email" 
+                    required email pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                </mat-form-field><br/>
+             <mat-form-field>
+                <mat-checkbox class="example-margin" [(ngModel)]="dialogContactPhoneChecked"></mat-checkbox>
+                <input matInput placeholder="Phone Number" class="form-control" id="phone" [ngModel]="dialogContact.phone" name="phone" required pattern='^\+?\d{0,13}'>
+             </mat-form-field>
+            
+          </div><br/>
+          <div class="excelContactsDetails">
+              <h2>New Contact</h2>
+              <mat-form-field>
+                  <mat-checkbox class="example-margin" [(ngModel)]="excelContactFirstNameChecked"></mat-checkbox>
+                  <input matInput placeholder="First Name" class="form-control" id="firstName" [(ngModel)]="excelContact.firstName" name="firstName">
+              </mat-form-field><br/>
+                <mat-form-field>
+                    <mat-checkbox class="example-margin" [(ngModel)]="excelContactLastNameChecked"></mat-checkbox>
+                    <input matInput placeholder="Last Name" class="form-control" id="lastName" [(ngModel)]="excelContact.lastName" name="lastName">
+                </mat-form-field><br/>
+                <mat-form-field>
+                    <mat-checkbox class="example-margin" [(ngModel)]="excelContactEmailChecked"></mat-checkbox>
+                    <input matInput type="email" placeholder="Email" class="form-control" id="email" [(ngModel)]="excelContact.email" name="email" 
+                    required email pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                </mat-form-field><br/>
+             <mat-form-field>
+                <mat-checkbox class="example-margin" [(ngModel)]="excelContactPhoneChecked"></mat-checkbox>
+                <input matInput placeholder="Phone Number" class="form-control" id="phone" [(ngModel)]="excelContact.phone" name="phone" required pattern='^\+?\d{0,13}'>
+             </mat-form-field><br/>
+          </div>
+        </div>
+      
+        <div class="buttons">
+            <button mat-raised-button color="primary" style="margin-right:10px" (click)="keepCurrent()">Skip</button>
+            <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+        </div>
+        
+    
  
 </div>
 

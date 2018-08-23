@@ -29,15 +29,19 @@ export class ContactListComponent implements OnInit{
   displayedColumns: string[] = ['firstName', 'lastName', 'email', 'phone','gender','icons','isFavourite'];
   dataSource:MatTableDataSource<Contact>;
   columns =  ['firstName', 'lastName', 'email'];
-
+  showGrid = false;
 
   @Input('contact') contact:Contact;
   constructor(private contactService:AddContactServerService, public dialog: MatDialog) { 
-    this.subscription = contactService.contactCurrentMessage.subscribe( contacts => {
-      
-      this.contacts = contacts;
-     
-      
+    this.subscription = this.contactService.contactCurrentMessage.subscribe( contacts => {
+      this.contacts = contacts
+      if(contacts){
+        this.dataSource = new MatTableDataSource<Contact>(contacts);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+        
+      }
+    
     })
   }
   @ViewChild(MatSort) sort: MatSort;
@@ -48,10 +52,12 @@ export class ContactListComponent implements OnInit{
   ngOnInit() {
     this.contactAdded()
     this.favouriteAdded()
-
-    this.dataSource = new MatTableDataSource<Contact>(this.contacts);
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    if(this.contacts){
+      this.dataSource = new MatTableDataSource<Contact>(this.contacts);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    }
+ 
   }
 
   contactAdded(){
@@ -109,7 +115,7 @@ export class ContactListComponent implements OnInit{
  
     
     if(result.data == 'yes'){
-     console.log("yes!")
+
       this.contacts = JSON.parse(localStorage.getItem("contacts"));
       this.favourites = JSON.parse(localStorage.getItem("favourites"));
 
@@ -118,14 +124,20 @@ export class ContactListComponent implements OnInit{
         this.contacts.splice(contactsIndex, 1);
 
         localStorage.setItem("contacts", JSON.stringify(this.contacts));
+        this.dataSource = new MatTableDataSource<Contact>(this.contacts);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
         
         
       }
-      var favouritesIndex = this.favourites.findIndex((c)=>{return c.id == contact.id});
-      if(favouritesIndex != -1){
-        this.favourites.splice(favouritesIndex, 1); 
-      localStorage.setItem("favourites", JSON.stringify(this.favourites));
-      this.favouriteAdded()
+      if(this.favourites){
+        var favouritesIndex = this.favourites.findIndex((c)=>{return c.id == contact.id});
+        if(favouritesIndex != -1){
+          this.favourites.splice(favouritesIndex, 1); 
+        localStorage.setItem("favourites", JSON.stringify(this.favourites));
+        this.favouriteAdded()
+      }
+     
       dialogRef.close();
       }
     }
@@ -206,74 +218,81 @@ export class ContactListComponent implements OnInit{
 
   Upload() {
     var filteredArray = [];
+    var similarContactArray = [];
     let fileReader = new FileReader();
     let count = 0;
+    let returnedContactArray = [];
       fileReader.onload = (e) => {
+        
 
-        let excelContactsObject = this.getExcelFileData(fileReader)
+         let excelContactsObject = this.getExcelFileData(fileReader)
 
           this.excelContacts = excelContactsObject
           if(!this.contacts || this.contacts.length == 0){
             this.contacts = this.excelContacts;
             localStorage.setItem("contacts", JSON.stringify(this.contacts));
+            this.contactService.sendMessage(this.contacts);
             return;
+            
           }
+        
+        
          
           for(let i = 0; i < this.contacts.length; i++){
             for(let j = 0; j < this.excelContacts.length; j++){
               let similar = this.contacts[i].firstName == this.excelContacts[j].firstName && this.contacts[i].lastName == this.excelContacts[j].lastName
                   if(similar){
-                  count++
-                    const dialogRef = this.dialog.open(ImportDialogComponent, {
-                      width: '550px',
-                      height: '450px',
-                      data: {contact:this.excelContacts[j]},
-                    });
-                  
+                    let newcontactcopy = {firstName:this.contacts[i].firstName,lastName:this.contacts[i].lastName,email:this.contacts[i].email
+                      , company:this.contacts[i].company,jobTitle:this.contacts[i].jobTitle,phone:this.contacts[i].phone,gender:this.contacts[i].gender
+                      ,birthDate:this.contacts[i].birthDate,image:this.contacts[i].image,id:this.contacts[i].id,isFavourite:this.contacts[i].isFavourite
+                      ,icons:this.contacts[i].icons};
+
+                  similarContactArray.push({contact: newcontactcopy , excelContact:this.excelContacts[j] })
+                  }
+            }
+          }     
+                const dialogRef = this.dialog.open(ImportDialogComponent, {
+                  width: '700px',
+                  height: '800px',
+                  data: {contacts:similarContactArray},
+                  disableClose: true 
+                });
                     dialogRef.afterClosed().subscribe(result => {
-                      count--
-                        if(result.data.msg == 'keep'){
-                         filteredArray.push(this.contacts[i])
-                        }
-                     
-                       if(result.data.msg == 'replace'){
-                          filteredArray.push(this.excelContacts[j])
-                        }
-                        if(result.data.msg == 'change'){
-                          var contactsIndex = this.excelContacts.findIndex((c)=>{return c.id == result.data.contact.id});
-                          if(contactsIndex != -1){
-                            this.excelContacts[contactsIndex] = result.data.contact;
-                          }
-                        }
-                        if(count == 0){
+                      returnedContactArray = result.data;
+                  
                           this.contacts = this.contacts.filter( contact =>{
-                            let similar = filteredArray.some(f=> f.firstName == contact.firstName && f.lastName == contact.lastName)
+                            let similar = returnedContactArray.some(f=> f.firstName == contact.firstName && f.lastName == contact.lastName)
                             return !similar;
                           });
                   
                           this.excelContacts = this.excelContacts.filter( contact => {
-                            let similar = filteredArray.some(f=> f.firstName == contact.firstName && f.lastName == contact.lastName)
+                            let similar = returnedContactArray.some(f=> f.firstName == contact.firstName && f.lastName == contact.lastName)
                             return !similar;
-                          })
+                          });
                             
-                         this.contacts = this.contacts.concat(this.excelContacts,filteredArray)
+                         this.contacts = this.contacts.concat(this.excelContacts,returnedContactArray)
                          localStorage.setItem("contacts", JSON.stringify(this.contacts));
-                        }
+                       
+                         this.dataSource = new MatTableDataSource<Contact>(this.contacts);
+                         this.dataSource.sort = this.sort;
+                         this.dataSource.paginator = this.paginator;
+                        
                     });
-                       }
+                    
+                    
+                  }     
                    
-                    
-                    
-                  }   
-                     
+                 
+                    fileReader.readAsArrayBuffer(this.file);
+                  
             }
          
        
-      }
-      fileReader.readAsArrayBuffer(this.file);
+      
+   
     //  console.log( typeof fileReader)
      
-    }
+    
 
     ExportToExcel()
     {
@@ -304,6 +323,15 @@ export class ContactListComponent implements OnInit{
         return false;
       }
       else return true;
+   }
+
+   showMyGrid(){
+     console.log("grid")
+     this.showGrid = true;
+   }
+   tableShow(){
+     console.log("table")
+     this.showGrid = false;
    }
   // fullListConcat(){
     

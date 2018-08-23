@@ -17,6 +17,8 @@
 .addButton {
     margin-top:180px;
     margin-right: 66px;
+    position: relative;
+    z-index: 4;
 }
 .addButton:hover {
    cursor: pointer;
